@@ -1,11 +1,16 @@
 const Gameboard = (function createGameboard() {
-  gameboard = [
+  const gameboard = [
     new Array(3),
     new Array(3),
     new Array(3),
   ];
 
-  return { gameboard };
+  const getGameboard = () => gameboard;
+  const markGameboard = (row, col, marker) => {
+    gameboard[row][col] = marker;
+  }
+
+  return { gameboard, getGameboard, markGameboard };
 })();
 
-console.log(Gameboard)
+console.log(Gameboard.getGameboard());
