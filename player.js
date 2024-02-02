@@ -1,5 +1,5 @@
 function createPlayer(name, marker) {
-  return { name, marker, getPoints, givePoint };
+  return { name, marker };
 }
 
 const player1 = createPlayer('steve', 'X');
