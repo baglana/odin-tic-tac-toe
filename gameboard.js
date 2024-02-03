@@ -23,7 +23,6 @@ const Gameboard = (function createGameboard() {
     return gameboard[ind] === '';
   }
 
-
   return {
     printGameboard,
     getGameboard,
