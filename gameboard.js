@@ -6,11 +6,20 @@ const Gameboard = (function createGameboard() {
   ];
 
   const getGameboard = () => gameboard;
-  const markGameboard = (row, col, marker) => {
+  
+  const markCell = (row, col, marker) => {
     gameboard[row][col] = marker;
   }
 
-  return { gameboard, getGameboard, markGameboard };
-})();
+  const cellIsFree = (row, col) => {
+    return gameboard[row][col] === undefined;
+  }
 
-console.log(Gameboard.getGameboard());
+
+  return {
+    gameboard,
+    getGameboard,
+    markCell,
+    cellIsFree,
+  };
+})();

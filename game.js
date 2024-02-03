@@ -1,18 +1,37 @@
-function createGame(p1, p2) {
+function createGame(player1, player2) {
   let winner = null;
 
   const getWinner = () => winner;
   const setWinner = () => {};
 
-  return { p1, p2, getWinner, setWinner };
-}
+  let moves = 0;
+  let MAX_MOVES = 9;
 
-const player1 = createPlayer('steve', 'X');
-const player2 = createPlayer('paul', 'O');
+  const play = () => {
+    let prevPlayer = player1;
 
-const game = createGame(player1, player2);
+    while (moves < MAX_MOVES) { 
+      let curPlayer = (JSON.stringify(prevPlayer) === JSON.stringify(player1)) ? player2 : player1;
+      curPlayer.move();
+      moves++;
+      prevPlayer = curPlayer;
+    }
+  };
 
-player1.move(1, 2);
-player2.move(1, 1);
+  return {
+    player1,
+    player2,
+    getWinner,
+    setWinner,
+    play,
+  };
+  }
+  
+const game = createGame(
+  createPlayer('steve', 'X'),
+  createPlayer('paul', 'O')
+);
+
+game.play();
 
 console.log(Gameboard.getGameboard());
