@@ -1,17 +1,13 @@
 function createPlayer(name, marker) {
 
   const move = () => {
-    let { row, col } = getRandomCell();
-    while (!Gameboard.cellIsFree(row, col)) {
-      ({ row, col } = getRandomCell());
+    let cellInd = Gameboard.getRandomCellInd();
+    while (!Gameboard.cellIsFree(cellInd)) {
+      cellInd = Gameboard.getRandomCellInd();
     }
-    Gameboard.markCell(row, col, marker);
-  }
+    Gameboard.markCell(cellInd, marker);
 
-  const getRandomCell = () => {
-    const row = Math.floor(Math.random() * 3);
-    const col = Math.floor(Math.random() * 3);
-    return { row, col }
+    return cellInd;
   }
 
   return { name, marker, move };
