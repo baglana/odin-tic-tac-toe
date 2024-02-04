@@ -4,9 +4,9 @@ const COL = 3;
 const Gameboard = (function createGameboard() {
   const board = new Array(COL * ROW).fill('');
 
-  const getGameboard = () => board;
+  const getBoard = () => board;
   
-  const printGameboard = () => console.log(board);
+  const printBoard = () => console.log(board);
   
   const clearCells =  () => board.fill('');
 
@@ -26,8 +26,8 @@ const Gameboard = (function createGameboard() {
   }
 
   return {
-    printGameboard,
-    getGameboard,
+    printBoard,
+    getBoard,
     clearCells,
     getCellValue,
     getRandomCellInd,

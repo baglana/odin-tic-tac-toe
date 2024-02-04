@@ -2,6 +2,8 @@ function createGame(player1, player2) {
   let activePlayer = player1;
   let winner = null;
 
+  const getActivePlayer = () => activePlayer;
+
   const play = (cellInd) => {
       console.log(`Placing ${activePlayer.name}'s marker into cell ${cellInd}`);
       activePlayer.move(cellInd);
@@ -9,7 +11,7 @@ function createGame(player1, player2) {
       winner = judge(cellInd);
 
       if (typeof winner === "undefined") {
-        togglePlayer();
+        toggleActivePlayer();
       } else if (winner === null) {
         var resultMsg = 'It\'s a tie!';
         console.log(resultMsg);
@@ -21,10 +23,10 @@ function createGame(player1, player2) {
         return resultMsg;
       }
 
-    console.log(Gameboard.printGameboard());
+    console.log(Gameboard.printBoard());
   };
 
-  const togglePlayer = () => {
+  const toggleActivePlayer = () => {
     activePlayer = (activePlayer === player1) ? player2 : player1;
   }
   
@@ -47,7 +49,7 @@ function createGame(player1, player2) {
       return activePlayer;
     }
 
-    const draw = !new Set(Gameboard.getGameboard()).has("");
+    const draw = !new Set(Gameboard.getBoard()).has("");
     if (draw) {
       return null;
     }
@@ -69,6 +71,7 @@ function createGame(player1, player2) {
   };
 
   return {
+    getActivePlayer,
     player1,
     player2,
     play,

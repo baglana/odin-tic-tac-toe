@@ -12,9 +12,10 @@ const displayController = (function () {
   const renderGameboard = () => {
     boardDiv.textContent = '';
     
-    Gameboard.getGameboard().forEach((cellValue, ind) => {
+    Gameboard.getBoard().forEach((cellValue, ind) => {
       const cellBtn = document.createElement('button');
       cellBtn.classList.add('cell');
+      cellBtn.classList.add((game.getActivePlayer() === game.player1) ? 'player1' : 'player2');
       cellBtn.dataset.index = ind;
       cellBtn.textContent = cellValue;
       boardDiv.appendChild(cellBtn);
@@ -39,17 +40,15 @@ const displayController = (function () {
 
   boardDiv.addEventListener('click', boardClickHandler);
 
-  renderGameboard();
-
-  const h2 = document.querySelector('.results');
   const renderResults = (resultMsg) => {
+    const h2 = document.querySelector('.results');
     h2.textContent = resultMsg;
   }
 
   const renderRestartBtn = () => {
     const restartBtn = document.querySelector('.restart-btn');
     restartBtn.onclick = () => {
-      h2.textContent = '';
+      renderResults('');
       Gameboard.clearCells();
       renderGameboard();
       game = createGameAndPromptNames();
