@@ -2,13 +2,15 @@ const ROW = 3;
 const COL = 3;
 
 const Gameboard = (function createGameboard() {
-  const gameboard = new Array(COL * ROW).fill('');
+  const board = new Array(COL * ROW).fill('');
 
-  const getGameboard = () => gameboard;
+  const getGameboard = () => board;
+  
+  const printGameboard = () => console.log(board);
+  
+  const clearCells =  () => board.fill('');
 
-  const printGameboard = () => console.log(gameboard);
-
-  const getCellValue = (ind) => gameboard[ind];
+  const getCellValue = (ind) => board[ind];
 
   const getRandomCellInd = () => {
     const ind = Math.floor(Math.random() * ROW * COL);
@@ -16,16 +18,17 @@ const Gameboard = (function createGameboard() {
   }
   
   const markCell = (ind, marker) => {
-    gameboard[ind] = marker;
+    board[ind] = marker;
   }
 
   const cellIsFree = (ind) => {
-    return gameboard[ind] === '';
+    return board[ind] === '';
   }
 
   return {
     printGameboard,
     getGameboard,
+    clearCells,
     getCellValue,
     getRandomCellInd,
     markCell,

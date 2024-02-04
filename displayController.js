@@ -1,11 +1,14 @@
 const displayController = (function () {
-  const game = createGame(
-    createPlayer('steve', 'X'),
-    createPlayer('paul', 'O')
-  );
+  const createGameAndPromptNames = () => {
+    return createGame(
+      createPlayer(prompt('Enter player1 name: ', 'Steve'), 'X'),
+      createPlayer(prompt('Enter player2 name: ', 'Paul'), 'O')
+    );
+  }
+  
+  let game = createGameAndPromptNames();
   
   const boardDiv = document.querySelector('.board');
-
   const renderGameboard = () => {
     boardDiv.textContent = '';
     
@@ -24,7 +27,12 @@ const displayController = (function () {
     if (!selectedCellInd) return;
 
     if (!Gameboard.getCellValue(selectedCellInd)) {
-      game.play(selectedCellInd);
+      const results = game.play(selectedCellInd);
+
+      if (results) {
+        renderResults(results);
+      }
+      
       renderGameboard();
     }
   }
@@ -33,7 +41,24 @@ const displayController = (function () {
 
   renderGameboard();
 
-  return { renderGameboard };
+  const h2 = document.querySelector('.results');
+  const renderResults = (resultMsg) => {
+    h2.textContent = resultMsg;
+  }
+
+  const renderRestartBtn = () => {
+    const restartBtn = document.querySelector('.restart-btn');
+    restartBtn.onclick = () => {
+      h2.textContent = '';
+      Gameboard.clearCells();
+      renderGameboard();
+      game = createGameAndPromptNames();
+    }
+  }
+  
+  return { renderGameboard, renderRestartBtn };
 })();
 
+
 displayController.renderGameboard();
+displayController.renderRestartBtn();

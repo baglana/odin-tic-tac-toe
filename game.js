@@ -11,10 +11,14 @@ function createGame(player1, player2) {
       if (typeof winner === "undefined") {
         togglePlayer();
       } else if (winner === null) {
-        console.log('It\'s a tie!');
+        var resultMsg = 'It\'s a tie!';
+        console.log(resultMsg);
+        return resultMsg;
       } else {
         winner = activePlayer;
-        console.log(`The winner is ${winner.name}`);
+        resultMsg = `The winner is ${winner.name}`;
+        console.log(resultMsg);
+        return resultMsg;
       }
 
     console.log(Gameboard.printGameboard());
